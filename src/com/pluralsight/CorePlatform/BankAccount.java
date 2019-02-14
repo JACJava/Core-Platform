@@ -11,12 +11,14 @@ public class BankAccount {
     }
 
     //getters and setters so outside things can use
-    public int getBalance(){ return balance; }
+    public synchronized int getBalance() {
+        return balance;
+    }
     public void setBalance(int balance) {
         this.balance = balance; //right hand is the parameter, left hand is the field}
     }
 
-    public void deposit(int amount){
+    public synchronized void deposit(int amount){
         balance += amount;
     }
 
