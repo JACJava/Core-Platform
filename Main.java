@@ -1,241 +1,288 @@
 package com.pluralsight.CorePlatform;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Formatter;
-import java.util.StringJoiner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
+/*
+        ArrayList list = new ArrayList(); //array list of objects
 
- /*
-        StringJoiner sj = new StringJoiner(", ");
+        list.add("Foo");
+        list.add("Bar");
 
-        //sj.add("alpha");
-        //sj.add("theta");
-        //sj.add("gamma");
+        System.out.println("Elements of List:  " + list.size());
 
-        sj.add("alpha").add("theta").add("gamma");
+        for(Object o:list)
+            System.out.println(o.toString());
 
-        String theResult = sj.toString();
-        System.out.println("The Result:  " + theResult);
+        String s = (String)list.get(0);
+        System.out.println(s);
 
-        StringJoiner sj2 = new StringJoiner(", ","{", "}");
+        ArrayList<String> list0 = new ArrayList<>();
 
-        sj2.add("alpha");
-        sj2.add("theta");
-        sj2.add("gamma");
+        list0.add("Foo0");
+        list0.add("Bar0");
 
-        String theResult2 = sj2.toString();
-        System.out.println("The Result:  " + theResult2);
+        System.out.println("Elements of List0:  " + list0.size());
 
-        StringJoiner sj3 = new StringJoiner("], [","[", "]");
+        for(String o:list0)
+            System.out.println(o);
 
-        sj3.add("alpha");
-        sj3.add("theta");
-        sj3.add("gamma");
-
-        String theResult3 = sj3.toString();
-        System.out.println("The Result:  " + theResult3);
-
-        //20180820 handling a single value
-
-        StringJoiner sj4 = new StringJoiner(",");
-
-        sj4.add("alpha");
-
-        String theResult4 = sj4.toString();
-        System.out.println("The Result:  " + theResult4);
-
-        StringJoiner sj5 = new StringJoiner(", ", "{", "}");
-
-        sj5.add("alpha");
-
-        String theResult5 = sj5.toString();
-        System.out.println("The Result:  " + theResult5);
-
-        StringJoiner sj6 = new StringJoiner(",");
-
-        String theResult6 = sj6.toString();
-        System.out.println("The Result:  " + theResult6);
-
-        StringJoiner sj7 = new StringJoiner(", ", "{", "}");
-
-        String theResult7 = sj7.toString();
-        System.out.println("The Result:  " + theResult7);
-
-        StringJoiner sj8 = new StringJoiner(", ");
-
-        sj8.setEmptyValue("EMPTY");
-
-        String theResult8 = sj8.toString();
-        System.out.println("The Result:  " + theResult8);
-
-        StringJoiner sj9 = new StringJoiner(", ", "{", "}");
-
-        sj9.setEmptyValue("EMPTY");
-
-        String theResult9 = sj9.toString();
-        System.out.println("The Result:  " + theResult9);
-
-        StringJoiner sj10 = new StringJoiner(", ");
-
-        sj10.setEmptyValue("EMPTY");
-        sj10.add(""); // empty is not empty anymore -- once add is called
-
-        String theResult10 = sj10.toString();
-        System.out.println("The Result:  " + theResult10);
-
-        // constructing strings with formatting
-
-        int david = 13, dawson = 11, dillon = 4, gordon = 2;
-
-        // desired outpu:  "My nephews are 13, 11, 4, and 2 years old"
-
-        String s1 = "My nephews are " + david + ", " + dawson + ", " + dillon +", " + "and " + gordon + " years old.";
+        String s1 = list0.get(0);
         System.out.println(s1);
 
-        String s2 = String.format("My nephews are %d, %d, %d, and %d years old.", david, dawson, dillon, gordon);
+        ArrayList<String> list1 = new ArrayList<>();
+
+        list1.add("Foo1");
+        list1.add("Bar1");
+
+        LinkedList<String> list2 = new LinkedList<>();
+
+        list2.add("Baz2");
+        list2.add("Boo2");
+
+        System.out.println("List1 Contents");
+        for(String o:list1)
+            System.out.println(o);
+
+        System.out.println("List2 Contents");
+        for(String o:list2)
+            System.out.println(o);
+
+        list1.addAll(list2); //does not affect list2
+
+        System.out.println("After addAll List1 Contents");
+        for(String o:list1)
+            System.out.println(o);
+
+        MyClass julie = new MyClass("Julie", "ABCDEFG");
+        System.out.println("Label is:  " + julie.getLabel());
+        System.out.println("Value is:  " + julie.getValue());
+
+        ArrayList<MyClass> list3 = new ArrayList<>();
+
+        MyClass v1 = new MyClass("v1", "abc");
+        System.out.println("Label is:  " + v1.getLabel());
+        System.out.println("Value is:  " + v1.getValue());
+
+        MyClass v2 = new MyClass("v2", "abc");
+        System.out.println("Label is:  " + v2.getLabel());
+        System.out.println("Value is:  " + v2.getValue());
+
+        MyClass v3 = new MyClass("v3", "abc");
+        System.out.println("Label is:  " + v3.getLabel());
+        System.out.println("Value is:  " + v3.getValue());
+
+        // add those three objects to the collection
+        list3.add(v1);
+        list3.add(v2);
+        list3.add(v3);
+
+        for(Object o:list3)
+            System.out.println(o.toString()); //override of the tostring method
+
+        list3.remove(v3);
+        //you may think that this removes v3 -- but not doing a reference equals, doing a value equals
+        //so will walk thru and the first member it finds that matches or returns back
+        //an equals of true will be removed, so it removes v1...
+        // all same members have the same value
+        // this is nuts, why would you do this?
+
+        for(MyClass m:list3)
+            System.out.println(m.getLabel()); //different way of printing than above!!
+
+        // lambda java 8 collection features
+        ArrayList<MyClass> list4 = new ArrayList<>();
+
+        MyClass v12 = new MyClass("v12", "abc");
+        System.out.println("Label is:  " + v12.getLabel());
+        System.out.println("Value is:  " + v12.getValue());
+
+        MyClass v22 = new MyClass("v22", "abc");
+        System.out.println("Label is:  " + v22.getLabel());
+        System.out.println("Value is:  " + v22.getValue());
+
+        MyClass v32 = new MyClass("v32", "abc");
+        System.out.println("Label is:  " + v32.getLabel());
+        System.out.println("Value is:  " + v32.getValue());
+
+        // add those three objects to the collection
+        list4.add(v12);
+        list4.add(v22);
+        list4.add(v32);
+
+        for(MyClass m:list4)
+            System.out.println("Label:  " + m.getLabel()+" Value:  " + m.getValue()); //different way of printing than above!!
+
+        //or...could do a forEach "lambda" expression -- blocks of code against collections
+        list4.forEach(m4 -> System.out.println("Label:  " + m4.getLabel()+" Value:  " + m4.getValue()));
+
+        // more...
+        ArrayList<MyClass> list5 = new ArrayList<>();
+
+        MyClass v15 = new MyClass("v15", "abc");
+        System.out.println("Label is:  " + v15.getLabel());
+        System.out.println("Value is:  " + v15.getValue());
+
+        MyClass v25 = new MyClass("v25", "xyz");
+        System.out.println("Label is:  " + v25.getLabel());
+        System.out.println("Value is:  " + v25.getValue());
+
+        MyClass v35 = new MyClass("v35", "abc");
+        System.out.println("Label is:  " + v35.getLabel());
+        System.out.println("Value is:  " + v35.getValue());
+
+        // add those three objects to the collection
+        list5.add(v15);
+        list5.add(v25);
+        list5.add(v35);
+
+        // remove each one that has a value of "abc"
+        list5.removeIf(m5 -> m5.getValue().equals("abc"));
+
+        list5.forEach(m5 -> System.out.println("Label:  " + m5.getLabel()+" Value:  " + m5.getValue()));
+
+
+
+
+        // converting between collections 20180824
+        System.out.println("*** Converting Between Collections 20180824 ***");
+        ArrayList<MyClass> list6 = new ArrayList<>();
+
+        list6.add(new MyClass("v16", "abc"));
+        list6.add(new MyClass("v26", "xyz"));
+        list6.add(new MyClass("v36", "abc"));
+
+        list6.forEach(m6 -> System.out.println("Label:  " + m6.getLabel()+" Value:  " + m6.getValue()));
+
+        Object[] objArray = list6.toArray(); //get back an array of objects with each member being the three myclass intances
+
+        for(Object o:objArray)
+            System.out.println(o.toString()); //override of the tostring method
+
+        //pass in typed array, create an array with zero members, just used to indicate type
+        // toarray will create a new array of myclass members
+        // a1 is a newly created array containing references to the 3 MyClass instances that
+        // were inside of the collection
+        MyClass[] a1 = list6.toArray(new MyClass[0]);
+        for(Object o:a1)
+            System.out.println(o.toString());
+
+        MyClass[] a2 = new MyClass[3];
+        MyClass[] a3 = list6.toArray(a2);
+
+        if(a2 == a3)
+            System.out.println("a2 and a3 reference the same array because it had room");
+
+        MyClass[] myArray= {
+                new MyClass("val17", "abc"),
+                new MyClass ("val27", "xyz"),
+                new MyClass ("val37", "abc")
+
+        };
+
+        Collection<MyClass> list7 = Arrays.asList(myArray);
+
+        list7.forEach(m7 -> System.out.println("Label:  " + m7.getLabel()+" Value:  " + m7.getValue()));
+
+
+        // Sorting 20180824
+        System.out.println("*** Sorting 20180824 -- Sort by Value ***");
+
+        TreeSet<MyClassSort> tree7 = new TreeSet<>(); //treeset maintains sorting and implements comparable interface
+
+        tree7.add(new MyClassSort("2222", "ghi"));
+        tree7.add(new MyClassSort("3333", "abc"));
+        tree7.add(new MyClassSort("1111", "def"));
+
+        tree7.forEach(m7 -> System.out.println(m7));
+
+        //for(Object o:tree7)
+        //    System.out.println(o.toString());
+
+        //alternate sort
+        System.out.println("*** Alternate Sort with Comparator 20180824 -- Sort by Label ***");
+
+        TreeSet<MyClass> tree8 = new TreeSet<>(new MyComparator()); //treeset maintains sorting and implements comparable interface
+
+        tree8.add(new MyClass("2222", "ghi"));
+        tree8.add(new MyClass("3333", "abc"));
+        tree8.add(new MyClass("1111", "def"));
+
+        tree8.forEach(m8 -> System.out.println(m8));
+
+*/
+
+        // Map Collections 20180824
+        System.out.println("*** Map Collections 20180824 ***");
+
+        Map<String, String> map = new HashMap<>();
+
+        map.put("2222", "ghi");
+        map.put("3333", "abc");
+        map.put("1111", "def");
+
+        String s1 = map.get("3333"); //s1 has "abc"
+        System.out.println(s1);
+        String s2 = map.get("9999"); //s2 has null
         System.out.println(s2);
-
-        // find out average age difference
-        double avgDiff = ((david - dawson) + (dawson - dillon) + (dillon - gordon)) / 3.0d;
-
-        String s3 = "The average age between each is " + avgDiff + " years.";
+        String s3 = map.getOrDefault("9999", "xyz"); //s2 has null
         System.out.println(s3);
 
-        String s4 = String.format("The average age between each is %.1f years", avgDiff);
-        System.out.println(s4);
+        map.forEach((k, v) -> System.out.println(k + " | " + v));
 
-        //format flags
+        map.replaceAll((k , v) -> v.toUpperCase());
 
-        String s5 = String.format("%d", 32);
-        System.out.println(s5);
-        String s6 = String.format("%o", 32);
-        System.out.println(s6);
-        String s7 = String.format("%x", 32);
-        System.out.println(s7);
-        String s8 = String.format("%#o", 32);
-        System.out.println(s8);
-        String s9 = String.format("%#x", 32);
-        System.out.println(s9);
-        String s10 = String.format("%#X", 32);
-        System.out.println(s10);
+        map.forEach((k, v) -> System.out.println(k + " | " + v));
 
-        String s11 = String.format("W:%d X:%d", 5, 235);
-        System.out.println(s11);
+        System.out.println("*** Map Collections -- Sorted Maps 20180824 ***");
 
-        String s12 = String.format("W:%d X:%d", 481, 12);
-        System.out.println(s12);
+        SortedMap<String, String> map1 = new TreeMap<>();
+        map1.put("2222", "ghi");
+        map1.put("3333", "abc");
+        map1.put("1111", "def");
+        map1.put("6666", "xyz");
+        map1.put("4444", "mno");
+        map1.put("5555", "pqr");
 
-        String s13 = String.format("W:%4d X:%4d", 5, 235);
-        System.out.println(s13);
-        String s14 = String.format("W:%4d X:%4d", 481, 12);
-        System.out.println(s14);
+        map1.forEach((k, v) -> System.out.println(k + " | " + v)); // sorted by key!
 
-        String s15 = String.format("W:%04d X:%04d", 5, 235);
-        System.out.println(s15);
-        String s16 = String.format("W:%04d X:%04d", 481, 12);
-        System.out.println(s16);
 
-        String s17 = String.format("W:%-4d X:%-4d", 5, 235);
-        System.out.println(s17);
-        String s18 = String.format("W:%-4d X:%-4d", 481, 12);
-        System.out.println(s18);
+        System.out.println("*** Map Collections -- Sorted Maps other values 20180824 ***");
 
-        String s19 = String.format("%d", 1234567);
-        System.out.println(s19);
-        String s20 = String.format("%,d", 1234567);
-        System.out.println(s20);
-        String s21 = String.format("%,.2f", 1234567.0);
-        System.out.println(s21);
+        SortedMap<String, String> map2 = new TreeMap<>();
+        map2.put("2222", "ghi");
+        map2.put("3333", "abc");
+        map2.put("1111", "def");
+        map2.put("6666", "xyz");
+        map2.put("4444", "mno");
+        map2.put("5555", "pqr");
 
-        String s22 = String.format("%d", 123);
-        System.out.println(s22);
-        String s23 = String.format("%d", -456);
-        System.out.println(s23);
+        map2.forEach((k, v) -> System.out.println(k + " | " + v)); // sorted by key!
 
-        String s24 = String.format("% d", 123);
-        System.out.println(s24);
-        String s25 = String.format("% d", -456);
-        System.out.println(s25);
+        SortedMap<String, String> hMap = map2.headMap("3333");
 
-        String s26 = String.format("%+d", 123);
-        System.out.println(s26);
-        String s27 = String.format("%+d", -456);
-        System.out.println(s27);
+        System.out.println("*** Map Collections -- After HeadMap 20180824 ***");
+        hMap.forEach((k, v) -> System.out.println(k + " | " + v));
 
-        String s28 = String.format("%(d", 123);
-        System.out.println(s28);
-        String s29 = String.format("%(d", -456);
-        System.out.println(s29);
+        SortedMap<String, String> tMap = map2.tailMap("3333");
 
-        String s30 = String.format("% (d", 123);
-        System.out.println(s30);
-        String s31 = String.format("% (d", -456);
-        System.out.println(s31);
+        System.out.println("*** Map Collections -- After TailMap 20180824 ***");
+        tMap.forEach((k, v) -> System.out.println(k + " | " + v));
 
-        String s32 = String.format("%d %d %d", 100, 200, 300);
-        System.out.println(s32);
-
-        String s33 = String.format("%3$d %2$d %1$d", 100, 200, 300);
-        System.out.println(s33);
-
-        //String s34 = String.format("%$2d %<04d %$1d", 100, 200, 300);
-        //System.out.println(s34); did not work, maybe difference with java versions
-
-        doWrite (david, dawson, dillon, gordon, avgDiff);
-
-    */
-
-        String s35 = "apple, apple and orange, please";
-        System.out.println(s35);
-
-        String s36 = s35.replaceAll("ple", "ricot");
-        System.out.println(s36);
-
-        String s37 = s35.replaceAll("ple\\b", "ricot");
-        System.out.println(s37);
-
-        String[] parts = s35.split ("\\b");
-
-        for (int i = 0; i < parts.length; i++)
-            System.out.println(parts[i]);
-
-        for (String thePart:parts)
-            if(thePart.matches("\\w+"))
-                System.out.println(thePart);
-
-        //dedicated regular expressions...don't really get it...
-        Pattern pattern = Pattern.compile("\\w+");
-        Matcher matcher = pattern.matcher(s35);
-
-        while(matcher.find())
-            System.out.println(matcher.group());
 
 
 
 
     }
-
-    private static void doWrite(int david, int dawson, int dillon, int gordon, double avgDiff) throws IOException {
-        BufferedWriter writer = Files.newBufferedWriter(Paths.get("myFile.txt"));
-
-        try(Formatter f = new Formatter(writer)){
-            f.format("My nephews are %d, %d, %d, and %d years old.  ", david, dawson, dillon, gordon);
-            f.format("The average age between each is %.1f years",avgDiff);
-
-        }
-
-
-    }
-
-
-
-
 }
