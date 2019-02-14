@@ -1,0 +1,61 @@
+package com.pluralsight.CorePlatform;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class Adder implements Runnable {
+
+    // accepts input file and output file
+    private String inFile, outFile;
+
+    // constructor that sets initial state of the object
+    public Adder(String inFile, String outFile) {
+        this.inFile = inFile; //right hand is the parameter, left hand is the field
+        this.outFile = outFile;
+    }
+
+    //getters and setters so outside things can use
+    public String getInFile(){ return inFile; }
+    public void setInFile(String inFile) {
+        this.inFile = inFile; //right hand is the parameter, left hand is the field}
+    }
+
+    public String getOutFile(){ return outFile; }
+    public void setOutFile(String outFile) {
+        this.outFile = outFile;
+    }
+
+    //implements the threading with run()
+    public void run() {
+        try {
+            doAdd();
+        } catch (IOException e) {
+            System.out.println(e.getClass().getSimpleName() + " -- " + e.getMessage());
+        }
+    }
+
+
+    // reads each line of the input file and adds the numbers up
+    public void doAdd() throws IOException {
+        int total = 0;
+        String line = null;
+
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get(inFile))) {
+            while ((line = reader.readLine()) != null)
+                total += Integer.parseInt(line);
+        }catch(IOException e) {
+            System.out.println(e.getClass().getSimpleName() + " -- " + e.getMessage());
+        }
+
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(outFile))) {
+            writer.write("Total:  " + total);
+        }catch(IOException e) {
+            System.out.println(e.getClass().getSimpleName() + " -- " + e.getMessage());
+        }
+    }
+
+
+}
