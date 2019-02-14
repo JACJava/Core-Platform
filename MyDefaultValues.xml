@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-    <comment>My Comment Here for Loading Default Properties from a Package</comment>
-    <entry key="isFirstRun">Y</entry>
-    <entry key="welcomeMessage">Hello Newcomer</entry>
-    <entry key="farewellMessage">It'll all be different soon</entry>
-</properties>
